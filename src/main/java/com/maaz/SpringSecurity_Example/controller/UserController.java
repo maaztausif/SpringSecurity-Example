@@ -1,0 +1,27 @@
+package com.maaz.SpringSecurity_Example.controller;
+
+import com.maaz.SpringSecurity_Example.dao.UserRepo;
+import com.maaz.SpringSecurity_Example.model.User;
+import com.maaz.SpringSecurity_Example.model.UserPrincipal;
+import com.maaz.SpringSecurity_Example.service.UserService;
+import org.hibernate.annotations.WhereJoinTable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class UserController {
+
+    @Autowired
+    private UserService service;
+
+//    public User saveUSer(User user){
+//       return service.//repo.save(user);
+//    }
+
+    @PostMapping("register")
+    public User Register(@RequestBody User user){
+        return service.userSave(user);
+    }
+}
