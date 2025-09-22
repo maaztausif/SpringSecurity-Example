@@ -16,7 +16,7 @@ import java.util.*;
 public class JwtService {
 
 
-    private String SECRET = generateToken();
+    private String SECRET = generateSecretKey();
 
     public String generateToken(String username) {
 
