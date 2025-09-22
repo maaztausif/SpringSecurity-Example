@@ -3,6 +3,7 @@ package com.maaz.SpringSecurity_Example.controller;
 import com.maaz.SpringSecurity_Example.dao.UserRepo;
 import com.maaz.SpringSecurity_Example.model.User;
 import com.maaz.SpringSecurity_Example.model.UserPrincipal;
+import com.maaz.SpringSecurity_Example.service.JwtService;
 import com.maaz.SpringSecurity_Example.service.UserService;
 import org.hibernate.annotations.WhereJoinTable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    @Autowired
+    private JwtService jwtService;
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -38,7 +41,7 @@ public class UserController {
 
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
         if(authentication.isAuthenticated()){
-            return "Success";
+            return jwtService.generateToken(user.getUsername());
         }else {
             return "false";
         }
